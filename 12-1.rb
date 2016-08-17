@@ -7,9 +7,6 @@ if (Gem.win_platform?)
     io.set_encoding(Encoding.default_external, Encoding.default_internal)
   end
 end
-puts "Врага какого персонажа вы хотите узнать?"
-
-hero = STDIN.gets.encode("UTF-8").chomp
 
 heros_antiheros = {
     "Бэтмен" => "Джокер",
@@ -19,14 +16,29 @@ heros_antiheros = {
 
 }
 
-heros_antiheros["Моцарт"]= "Сальери"
 
-heros_antiheros.delete("Моцарт")
+puts "Врага какого персонажа вы хотите узнать?"
+
+number_of_keys = 0 #кол-во ключей уже использованных
+
+while number_of_keys !=4
 
 
-if heros_antiheros.has_key?(hero)
-  puts "Враг этого героя : #{heros_antiheros[hero]}"
+  hero = STDIN.gets.encode("UTF-8").chomp
 
-else
-  puts "Не удалось найти врага"
+
+  if heros_antiheros.has_key?(hero)
+    puts "Враг этого героя : #{heros_antiheros[hero]}"
+
+    heros_antiheros.delete(hero)
+    number_of_keys += 1
+
+  else
+    puts "Не удалось найти врага"
+  end
+
+  if number_of_keys == 4
+    puts "К сожалению, в нашем списке закончились герои "
+  end
+
 end
